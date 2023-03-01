@@ -1,0 +1,458 @@
+
+
+/*CREATE TABLE Person(pid integer,
+                    pname text,
+                    city text,
+                    primary key (pid));
+
+CREATE TABLE Company(cname text,
+                     headquarter text,
+                     primary key (cname));
+
+CREATE TABLE Skill(skill text,
+                   primary key (skill));
+
+
+CREATE TABLE worksFor(pid integer,
+                      cname text,
+                      salary integer,
+                      primary key (pid),
+                      foreign key (pid) references Person (pid),
+                      foreign key (cname) references Company(cname));
+
+
+CREATE TABLE companyLocation(cname text,
+                             city text,
+                             primary key (cname, city),
+                             foreign key (cname) references Company (cname));
+
+
+CREATE TABLE personSkill(pid integer,
+                         skill text,
+                         primary key (pid, skill),
+                         foreign key (pid) references Person (pid) on delete cascade,
+                         foreign key (skill) references Skill (skill) on delete cascade);
+
+
+CREATE TABLE hasManager(eid integer,
+                        mid integer,
+                        primary key (eid, mid),
+                        foreign key (eid) references Person (pid),
+                        foreign key (mid) references Person (pid));
+
+CREATE TABLE Knows(pid1 integer,
+                   pid2 integer,
+                   primary key(pid1, pid2),
+                   foreign key (pid1) references Person (pid),
+                   foreign key (pid2) references Person (pid));
+
+INSERT INTO Person VALUES
+     (1001,'Jean','Cupertino'),
+     (1002,'Vidya', 'Cupertino'),
+     (1003,'Anna', 'Seattle'),
+     (1004,'Qin', 'Seattle'),
+     (1005,'Megan', 'MountainView'),
+     (1006,'Ryan', 'Chicago'),
+     (1007,'Danielle','LosGatos'),
+     (1008,'Emma', 'Bloomington'),
+     (1009,'Hasan', 'Bloomington'),
+     (1010,'Linda', 'Chicago'),
+     (1011,'Nick', 'MountainView'),
+     (1012,'Eric', 'Cupertino'),
+     (1013,'Lisa', 'Indianapolis'), 
+     (1014,'Deepa', 'Bloomington'), 
+     (1015,'Chris', 'Denver'),
+     (1016,'YinYue', 'Chicago'),
+     (1017,'Latha', 'LosGatos'),
+     (1018,'Arif', 'Bloomington'),
+     (1019,'John', 'NewYork');
+
+INSERT INTO Company VALUES
+     ('Apple', 'Cupertino'),
+     ('Amazon', 'Seattle'),
+     ('Google', 'MountainView'),
+     ('Netflix', 'LosGatos'),
+     ('Microsoft', 'Redmond'),
+     ('IBM', 'Seattle'),
+     ('ACM', 'NewYork');
+
+
+INSERT INTO worksFor VALUES
+     (1001,'Apple', 65000),
+     (1002,'Apple', 45000),
+     (1003,'Amazon', 55000),
+     (1004,'Amazon', 55000),
+     (1005,'Google', 60000),
+     (1006,'Amazon', 55000),
+     (1007,'Netflix', 50000),
+     (1008,'Amazon', 50000),
+     (1009,'Apple',60000),
+     (1010,'Amazon', 55000),
+     (1011,'Google', 70000), 
+     (1012,'Apple', 50000),
+     (1013,'Netflix', 55000),
+     (1014,'Apple', 50000), 
+     (1015,'Amazon', 60000),
+     (1016,'Amazon', 55000),
+     (1017,'Netflix', 60000),
+     (1018,'Apple', 50000),
+     (1019,'Microsoft', 50000);
+
+INSERT INTO companyLocation VALUES
+   ('Apple', 'Bloomington'),
+   ('Amazon', 'Chicago'),
+   ('Amazon', 'Denver'),
+   ('Amazon', 'Columbus'),
+   ('Google', 'NewYork'),
+   ('Netflix', 'Indianapolis'),
+   ('Netflix', 'Chicago'),
+   ('Microsoft', 'Bloomington'),
+   ('Apple', 'Cupertino'),
+   ('Amazon', 'Seattle'),
+   ('Google', 'MountainView'),
+   ('Netflix', 'LosGatos'),
+   ('Microsoft', 'Redmond'),
+   ('IBM', 'NewYork');
+
+INSERT INTO Skill VALUES
+   ('Programming'),
+   ('AI'),
+   ('Networks'),
+   ('OperatingSystems'),
+   ('Databases');
+
+INSERT INTO personSkill VALUES
+ (1001,'Programming'),
+ (1001,'AI'),
+ (1002,'Programming'),
+ (1002,'AI'),
+ (1004,'AI'),
+ (1004,'Programming'),
+ (1005,'AI'),
+ (1005,'Programming'),
+ (1005,'Networks'),
+ (1006,'Programming'),
+ (1006,'OperatingSystems'),
+ (1007,'OperatingSystems'),
+ (1007,'Programming'),
+ (1009,'OperatingSystems'),
+ (1009,'Networks'),
+ (1010,'Networks'),
+ (1011,'Networks'),
+ (1011,'OperatingSystems'),
+ (1011,'AI'),
+ (1011,'Programming'),
+ (1012,'AI'),
+ (1012,'OperatingSystems'),
+ (1012,'Programming'),
+ (1013,'Programming'),
+ (1013,'AI'),
+ (1013,'OperatingSystems'),
+ (1013,'Networks'),
+ (1014,'OperatingSystems'),
+ (1014,'AI'),
+ (1014,'Networks'),
+ (1015,'Programming'),
+ (1015,'AI'),
+ (1016,'OperatingSystems'),
+ (1016,'AI'),
+ (1017,'Networks'),
+ (1017,'Programming'),
+ (1018,'AI'),
+ (1019,'Networks');
+
+INSERT INTO hasManager VALUES
+ (1004, 1003),
+ (1006, 1003),
+ (1015, 1003),
+ (1016, 1004),
+ (1016, 1006),
+ (1008, 1015),
+ (1010, 1008),
+ (1013, 1007),
+ (1017, 1013),
+ (1002, 1001),
+ (1009, 1001),
+ (1014, 1012);
+
+ INSERT INTO Knows VALUES
+ (1011,1009),
+ (1007,1016),
+ (1011,1010),
+ (1003,1004),
+ (1006,1004),
+ (1002,1014),
+ (1009,1005),
+ (1018,1009),
+ (1007,1017),
+ (1017,1019),
+ (1019,1013),
+ (1016,1015),
+ (1001,1012),
+ (1015,1011),
+ (1019,1006),
+ (1013,1002),
+ (1018,1004),
+ (1013,1007),
+ (1014,1006),
+ (1004,1014),
+ (1001,1014),
+ (1010,1013),
+ (1010,1014),
+ (1004,1019),
+ (1018,1007),
+ (1014,1005),
+ (1015,1018),
+ (1014,1017),
+ (1013,1018),
+ (1007,1008),
+ (1005,1015),
+ (1017,1014),
+ (1015,1002),
+ (1018,1013),
+ (1018,1010),
+ (1001,1008),
+ (1012,1011),
+ (1002,1015),
+ (1007,1013),
+ (1008,1007),
+ (1004,1002),
+ (1015,1005),
+ (1009,1013),
+ (1004,1012),
+ (1002,1011),
+ (1004,1013),
+ (1008,1001),
+ (1008,1019),
+ (1019,1008),
+ (1001,1019),
+ (1019,1001),
+ (1004,1003),
+ (1006,1003),
+ (1015,1003),
+ (1016,1004),
+ (1016,1006),
+ (1008,1015),
+ (1010,1008),
+ (1017,1013),
+ (1002,1001),
+ (1009,1001),
+ (1011,1005),
+ (1014,1012);*/
+
+-- Problem 1
+/* Provide 4 conceptually different examples that illustrate how the
+ presence or absence of primary and foreign keys affect insert and
+ deletes in these relations.  To solve this problem, you will need to
+ experiment with the relation schemas and instances for this
+ assignment.  For example, you should consider altering primary keys
+ and foreign key constraints and then consider various sequences of
+ insert and delete operations.  You may need to change some of the
+ relation instances to observe the desired effects.  Certain inserts
+ and deletes should succeed but other should generate error
+ conditions.  (Consider the lecture notes about keys, foreign keys,
+ and inserts and deletes as a guide to solve this problem.)
+ */
+ 
+-- --'Problem 1 conceptual example 1'
+
+-- --'Problem 1 conceptual example 2'
+
+-- --'Problem 1 conceptual example 3'
+
+-- --'Problem 1 conceptual example 4'
+
+-- Before starting with the rest of the assignment, make sure to
+-- use the originally given data set in data.sql
+
+-- ---- ---- --'Problem 2'
+-- Find the ID, name and company’s name of each person who (a) works for
+-- a company located in Mountain View (b) has Programming skill and (c)
+-- earns between 50000 and 75000.
+
+
+
+Select distinct p.pid, p.pname, wF.cname
+From Person P, worksFor wF, personSkill ps
+Where city = 'MountainView' And wF.cname in (Select cl.cname 
+											 From companyLocation cl 
+											 Where cl.city ='MountainView')
+											 
+											 And p.pid = ps.pid And ps.skill = 'Programming'
+											 And (wf.Salary >= 50000 or wf.salary <= 75000);
+											 
+											 
+---- 'Problem 3'
+-- Find each skill that is the skill of at least 2 persons. 
+
+Select Distinct p1.skill
+From personSkill p1, personSkill p2
+Where p1.pid > p2.pid and p1.skill = p2.skill;
+
+
+--\qecho 'Problem 4'
+-- Find the ID, name and city of each person who knows at least one person
+-- who is a manager.
+
+/* managers 
+Select distinct hm.mid
+from hasManager hm
+
+Select distinct pid1, pid2
+From Knows
+Where pid2 in (1003,1015)
+order by pid1*/
+
+
+
+-- \qecho 'Problem 5'
+-- Find the pairs of pids (p1, p2) such that p2 has none of the skills of p1 (both 
+-- p1 and p2 must have atleast 1 skill).
+
+
+Select distinct ps1.pid, ps2.pid
+From personSkill ps1, personSkill ps2
+where (ps1.pid,ps2.pid) not in (Select distinct ps1.pid, ps2.pid
+							From personSkill ps1, personSkill ps2
+							Where ps1.pid<> ps2.pid 
+							And ps1.skill = ps2.skill
+							order by ps1.pid)
+							
+And ps1.pid <> ps2.pid;
+
+
+-- \qecho 'Problem 6'
+-- Find the ID, name and salary of each employee who has atleast two managers
+-- such that these managers have a common job skill of ’Programming’.
+
+-- find who has atleast two managers
+
+Select distinct ps1.pid, pe.pname, wf.salary 
+From personSkill ps1, personSkill ps2, Person pe, worksFor wf
+where (ps1.pid,ps2.pid) in (Select distinct hm1.eid , hm1.mid
+							from hasManager hm1, hasManager hm2
+							where hm1.eid = hm2.eid 
+							And hm2.mid <> hm1.mid)
+							
+							And ps1.skill = ps2.skill
+							And ps1.pid = pe.pid
+							And wf.pid = ps2.pid;
+
+
+--/qecho 'Problem 7'
+-- Find the ID and name of each person who lives in a city that is same as
+-- atleast one of his/her managers.
+
+
+Select p1.pid, p1.pname
+From hasManager hm1, Person p1, Person p2  
+Where hm1.eid = p1.pid and hm1.mid = p2.pid
+And p1.city = p2.city;
+
+------'Problem 8'
+-- Find the company name of each company with headquarter in LosGatos,but that is not
+-- located in Denver, along with the ID, name, and salary of each person who works for
+-- that company and who has the next to lowest salary (i.e., the second lowest salary) at that company.
+							 
+Select wF.cname, wF.pid, wF.salary
+From worksFor wF 	
+Where  wF.cname in (Select hq.cname
+				 from Company hq 
+				 where headquarter = 'LosGatos' 
+				 and hq.cname not in (Select cl.cname
+									  from companyLocation cL
+									  where cL.city ='Denver'))
+									  
+		and wF.salary in (Select distinct wF3.salary 
+						 From worksFor wF2, worksFor wF3 
+						 where (wF3.cname = wF2.cname) and wF3.cname = wF.cname and wF3.salary > wF2.salary)
+						 
+			and wF.salary <= All(Select distinct wF3.salary 
+						 From worksFor wF2, worksFor wF3 
+						 where (wF3.cname = wF2.cname) and wF3.cname = wF.cname and wF3.salary > wF2.salary);
+		
+
+
+-- --- Problem 9
+-- For each company, list the company name along with the lowest salary
+-- made by employees who work for it. (The query is expected to return the
+-- company name and salary fields as output)
+
+Select distinct wF.cname, wF.salary from worksFor wF
+Where wF.salary <= All(Select wF2.salary from worksFor wF2 where wF.cname = wF2.cname);
+
+----- 'Problem 10'
+Select wF.pid, p.pname
+from worksFor wF, Person p, personSkill ps
+where wF.cname <> 'Google'
+And wF.pid = p.pid 
+And wF.pid = ps.pid
+And ps.skill = 'Programming';
+
+
+
+----- 'Problem 11'
+Select p.pid, p.pname From Person p, worksFor w, company c
+Where p.pid in (Select w.pid From worksFor w Where w.salary >= 50000)
+and p.pid = w.pid	and w.cname = c.cname
+and c.headquarter ='Seattle' 
+and p.pid in (Select p.pid 
+			  from Person e, hasManager m, person p
+			  where m.mid = e.pid and p.pid = m.eid 
+			  and e.city <> 'Seattle' order by 1);
+
+
+----- 'Problem 12'
+
+Select distinct m.mid from hasManager m, worksFor w, company c, person p, worksFor ws, person e Where w.cname = c.cname 
+
+and p.pid = m.mid and m.mid = w.pid and w.salary >= 45000
+
+and e.pid = ws.pid  and m.eid = ws.pid   order by 1; -- e.pid = ws.pid  and m.eid = ws.pid 
+
+-----'Problem 13'
+Select distinct p.pid , p.pname from hasManager m, worksFor w, company c, person p, worksFor ws, person e 
+where p.pid = m.eid and ws.pid = m.mid and e.pid = m.mid and w.cname = ws.cname and p.city = e.city order by 1;
+
+
+----- 'Problem 18'
+-- Some person that works for a company has at least two managers.
+Select* from hasManager hs, hasManager hs2
+Where hs.eid = hs2.eid and hs.mid <> hs2.mid;
+
+Select exists (select 1 
+			  from hasmanager hs
+			  where exists (select 1
+						   from hasmanager hs2
+						   where hs.eid = hs2.eid
+						   and hs.mid <> hs2.mid));
+
+--
+----- 'Problem 19'
+-- Each person has a salary that is strictly lower than the salary of each of
+-- his or her managers.
+
+
+
+Select exists (select 1
+			  from hasmanager e, hasmanager m
+			  where exists (select 1
+						   from worksfor wm, worksfor we
+						   where wm.pid = m.mid and e.eid = we.pid and m.mid = e.mid and e.eid = m.eid  and wm.salary < we.salary));
+						   
+-- select * from worksFor order by 1;
+
+-----'Problem 20'
+-- Each employee that has a manager also has some skill.
+
+Select distinct e.eid from hasmanager e 
+where e.eid not in (Select distinct ps.pid from personSkill ps );
+
+Select exists (select 1
+			  from hasmanager e
+			  where not exists (select 1
+						   from personSkill ps
+						   where e.eid not in (ps.pid)));
+
+
+
